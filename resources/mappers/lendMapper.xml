@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sesoc.global.library.dao.lendDAO">
+ 
+ <insert id="insertlend" parameterType="Lend">
+ insert into lend values(
+ 	lend_seq.nextval,
+ 	#{usernum},
+ 	#{booknum},
+ 	sysdate,
+ 	sysdate + 10,
+ 	sysdate + 10,
+ 	'reserved'
+ )
+ </insert>
+ 
+ <select id="statusinfo" parameterType="int" resultType="string">
+ 	select status from lend where booknum=#{bnum}
+ </select>
+ 
+ <select id="history" parameterType="string" resultType="Lend">
+ 	select * from lend where usernum=#{unum}
+ </select>
+	
+</mapper>

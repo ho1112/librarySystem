@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="sesoc.global.library.dao.booksDAO">
+ 
+ <select id="list" parameterType="map"  resultType="Books">
+ 	SELECT
+		num,
+		title,
+		publisher,
+		author,
+		content,
+		imageurl
+	FROM books
+	WHERE
+		<choose>
+		<when test="searchtype == 'title'">
+			title
+		</when>
+		<when test="searchtype == 'publisher'">
+			publisher
+		</when>
+		<when test="searchtype == 'author'">
+			author
+		</when>
+		</choose>
+		LIKE '%' || #{searchword} || '%'
+<!-- inputdate를 boardnum으로 바꿈 -->
+	ORDER BY num DESC
+	</select>
+ 
+ 	<select id="allList" resultType="Books">
+ 		select * from books
+ 	</select>
+ 
+ 	<select id="bookinfo" parameterType="int" resultType="Books">
+ 		select * from books where num=#{num}
+ 	</select>
+	
+	  
+</mapper>

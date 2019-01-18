@@ -1,0 +1,51 @@
+create table users(
+	num varchar2(30) primary key,
+	userid varchar2(30) unique,
+	password varchar2(30) not null,
+	birthdate date not null,
+	username varchar2(30) not null,
+	tel1 varchar2(30) not null,
+	tel2 varchar2(30) not null,
+	tel3 varchar2(30) not null,
+	image varchar2(200)
+);
+
+create table lend(
+	num number not null,
+	usernum varchar2(30) not null,
+	booknum number unique,
+	startdate date not null,
+	enddate date not null,
+	returndate date not null,
+	status varchar2(30) not null,
+	constraint lend_usernum_fk FOREIGN KEY(usernum)
+	references users(num),
+	constraint lend_booknum_fk FOREIGN KEY(booknum)
+	references books(num)
+);
+
+create sequence lend_seq
+start with 1
+increment by 1;
+
+create table books(
+	num number primary key,
+	title varchar2(30) not null,
+	publisher varchar2(30) not null,
+	author varchar2(30) not null,
+	content varchar2(100) not null,
+	imageurl varchar2(200)
+);
+
+create sequence books_seq
+start with 1
+increment by 1;
+
+insert into books (num,title,publisher,author,content,imageurl) values(
+	books_seq.nextval,
+	'일본정치사상사연구',
+	'통나무',
+	'마루야마마사오',
+	'일본정치사상사연구입니다',
+	'resources/일본정치.jpg'
+)

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="sesoc.global.library.dao.usersDAO">
+	<insert id="join" parameterType="Users">
+		insert into users values(
+  		#{num},
+  		#{userid},
+  		#{password},
+  		TO_DATE(#{birthdate},'yyyy-mm-dd'),
+  		#{username},
+  		#{tel1},
+  		#{tel2},
+  		#{tel3},
+  		#{image}
+  	)
+	</insert>
+	
+	<select id="login" parameterType="map" resultType="Users">
+		select * from users where userid=#{id} and password=#{pw}
+	</select>
+
+	<select id="check" parameterType="string" resultType="Users">
+		select * from users where userid=#{id}
+	</select>
+	
+	<select id="selectOne" parameterType="string" resultType="Users">
+		select * from users where userid=#{id}
+	</select>
+	
+	<update id="update" parameterType="Users">
+		update users set password=#{password}
+		,tel1=#{tel1}
+		,tel2=#{tel2}
+		,tel3=#{tel3}
+		 where userid=#{userid}
+	</update>
+	
+	  
+</mapper>
